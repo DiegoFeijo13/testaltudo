@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to page statistics app</h1>
+    <h3 class="display-6">Insert your favorite page url in the input bellow</h3>
+    <h3 class="display-6">click on <em>Shazam</em> to start the magic</h3>
+    <div class="input-group mb-3">        
+        <input type="text" class="form-control" placeholder="http://yourfavoritepage.com" aria-label="URL" aria-describedby="basic-addon2" id="input-url">
+        <button class="btn btn-outline-secondary" type="button" id="button-shazam" onclick="getPageContents()">Shazam!</button>
+    </div>
+</div>
+
+<div class="text-center" id="page-content" style="display:none;">
+
+</div>
+
+<script>
+    let action = '@Url.Action("GetURL", "Home")';
+    function getPageContents() {
+        let url = $("#input-url").val()
+        let pageContentDiv = $("#page-content")
+        
+        clear()
+
+        axios.get(action+'/?url='+url)
+            .then((response) => {
+                pageContentDiv.html(response.data)
+                pageContentDiv.show()
+        })
+    }
+
+    function clear() {
+        $("#page-content").html('')
+    }
+</script>
