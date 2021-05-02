@@ -10,6 +10,8 @@ namespace TesteAltudo.Models
         public List<string> Images { get; set; }
 
         public List<WordCount> Words { get; set; }
+
+        public string ErrorMsg { get; set; }
     }
 
     public class WordCount

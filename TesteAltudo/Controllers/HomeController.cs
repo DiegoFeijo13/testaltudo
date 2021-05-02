@@ -28,9 +28,16 @@ namespace TesteAltudo.Controllers
         {
             BOPageContents bopc = new BOPageContents();
 
-            var vm = bopc.GetURLContents(url);
+            try
+            {
+                var vm = bopc.GetURLContents(url);
 
-            return PartialView(vm);
+                return PartialView(vm);
+            }
+            catch (Exception ex)
+            {
+                return PartialView("ErrorPartial", new PageContentsViewModel { ErrorMsg = ex.Message });
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
